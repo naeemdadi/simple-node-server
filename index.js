@@ -15,11 +15,15 @@ axios.defaults.baseURL = process.env.URL;
 app.get("/getToken", async (req, res) => {
   try {
     // Send a POST request
-    const response = await axios.post(GENERATE_TOKEN_URL, req.data, {
-      headers: {
-        "Api-key": process.env.apiKey,
-      },
-    });
+    const response = await axios.post(
+      process.env.GENERATE_TOKEN_URL,
+      req.data,
+      {
+        headers: {
+          "Api-key": process.env.apiKey,
+        },
+      }
+    );
 
     const { data } = response;
 
@@ -42,7 +46,7 @@ app.post("/getProducts", async (req, res) => {
   try {
     // Send a POST request
     const response = await axios.post(
-      GET_PRODUCTS_URL,
+      process.env.GET_PRODUCTS_URL,
       {
         session_id: process.env.SESSION_ID,
       },
