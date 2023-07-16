@@ -10,8 +10,6 @@ const port = process.env.PORT || 9000;
 app.use(express.json());
 app.use(cors({ credentials: true, origin: true }));
 
-axios.defaults.baseURL = process.env.URL;
-
 app.get("/getToken", async (req, res) => {
   try {
     // Send a POST request
@@ -36,6 +34,8 @@ app.get("/getToken", async (req, res) => {
     throw new Error(err);
   }
 });
+
+app.use(cors({ credentials: true, origin: true }));
 
 app.post("/getProducts", async (req, res) => {
   const { authToken } = req.body;
