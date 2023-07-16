@@ -10,6 +10,14 @@ const port = process.env.PORT || 9000;
 app.use(express.json());
 app.use(cors({ credentials: true, origin: true }));
 
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 app.get("/getToken", async (req, res) => {
   try {
     // Send a POST request
@@ -34,8 +42,6 @@ app.get("/getToken", async (req, res) => {
     throw new Error(err);
   }
 });
-
-app.use(cors({ credentials: true, origin: true }));
 
 app.post("/getProducts", async (req, res) => {
   const { authToken } = req.body;
