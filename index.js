@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const axios = require("axios");
 
 require("dotenv").config();
 
@@ -11,14 +12,13 @@ app.use(cors({ credentials: true, origin: true }));
 
 app.get("/getToken", async (req, res) => {
   // Send a POST request
-  const response = await fetch(process.env.URL, {
-    method: "post",
+  const response = await axios.post(process.env.URL, req.data, {
     headers: {
       "Api-key": process.env.apiKey,
     },
   });
 
-  const data = await response.json();
+  const { data } = response;
 
   if (!data.status) {
     res.send(data.errors || "Failed to generate token");
