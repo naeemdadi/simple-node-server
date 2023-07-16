@@ -44,11 +44,10 @@ app.get("/getToken", async (req, res) => {
 });
 
 app.post("/getProducts", async (req, res) => {
-  const { authToken } = req.body;
+  const authToken = req.headers.authorization;
   if (!authToken) {
     res.status(404).send({ message: "authToken is missing!" });
   }
-  console.log({ authToken });
   try {
     // Send a POST request
     const response = await axios.post(
@@ -72,7 +71,6 @@ app.post("/getProducts", async (req, res) => {
       res.json(data.data);
     }
   } catch (err) {
-    // console.log({ err });
     res.send(err);
   }
 });
