@@ -69,7 +69,7 @@ app.post("/getProducts", async (req, res) => {
     if (!data.status) {
       res.send(data.errors || "Failed to get Products");
     } else {
-      res.send(data.data);
+      res.json(data.data);
     }
   } catch (err) {
     // console.log({ err });
